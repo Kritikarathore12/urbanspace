@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+    baseURL: 'https://urbanspace.onrender.com/api', // Hardcoded for testing
     headers: {
         'Content-Type': 'application/json'
     }
