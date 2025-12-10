@@ -57,7 +57,23 @@ const seedData = async () => {
         console.log('Projects Seeded');
 
         await Client.insertMany(clients);
+        await Client.insertMany(clients);
         console.log('Clients Seeded');
+
+        // Seed Admin User
+        const User = require('./models/User');
+        const bcrypt = require('bcryptjs');
+
+        await User.deleteMany({}); // Optional: Reset admin
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash('admin123', salt);
+
+        await User.create({
+            username: 'admin',
+            password: hashedPassword,
+            isAdmin: true
+        });
+        console.log('Admin User Seeded (admin/admin123)');
 
         console.log('Data Seeding Completed');
         process.exit();
